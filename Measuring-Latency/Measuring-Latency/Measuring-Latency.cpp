@@ -33,10 +33,8 @@ create_clock(TEST, USE_CLOCK)
 int main()
 {
 	start_clock(TEST, USE_CLOCK);
-	sleep(1);
+	sleep(2);
 	stop_clock(TEST, USE_CLOCK);
-
-	taken_clock(TEST, USE_CLOCK);
 
 	print_clock(TEST, USE_CLOCK);
 

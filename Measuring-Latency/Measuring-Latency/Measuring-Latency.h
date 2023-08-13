@@ -33,11 +33,9 @@ struct timespec start_##VAR##CLOCK_TYPE, stop_##VAR##CLOCK_TYPE, diff_##VAR##CLO
 clock_getres(CLOCK_TYPE, &start_##VAR##CLOCK_TYPE); clock_gettime(CLOCK_TYPE, &start_##VAR##CLOCK_TYPE);
 
 #define stop_clock(VAR,CLOCK_TYPE)              \
-clock_getres(CLOCK_TYPE, &stop_##VAR##CLOCK_TYPE);  clock_gettime(CLOCK_TYPE, &stop_##VAR##CLOCK_TYPE);
-
-#define taken_clock(VAR,CLOCK_TYPE)             \
 do { \
-        clock_getres(CLOCK_TYPE, &diff_##VAR##CLOCK_TYPE);\
+        clock_getres(CLOCK_TYPE, &stop_##VAR##CLOCK_TYPE);  clock_gettime(CLOCK_TYPE, &stop_##VAR##CLOCK_TYPE); \
+		clock_getres(CLOCK_TYPE, &diff_##VAR##CLOCK_TYPE);\
         diff_##VAR##CLOCK_TYPE.tv_sec = stop_##VAR##CLOCK_TYPE.tv_sec - start_##VAR##CLOCK_TYPE.tv_sec; \
         diff_##VAR##CLOCK_TYPE.tv_nsec = stop_##VAR##CLOCK_TYPE.tv_nsec - start_##VAR##CLOCK_TYPE.tv_nsec; \
 } while (0);
